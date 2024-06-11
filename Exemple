@@ -1,0 +1,25 @@
+# -*- coding: utf-8 -*-
+"""
+Example script for nutritional geometry analysis.
+"""
+
+
+def main():
+    # User data
+    user_data = [85, 1.71, 41.02, 29.63, 31.8, 94]
+    user_gender = "Male"
+    user_name = "André"
+
+    print(f"Calculating BMI for {user_name}...")
+    bmi = calculate_bmi(user_data[0], user_data[1])
+    print(f"BMI: {bmi}")
+
+    print(f"Classifying BMI for {user_name}...")
+    bmi_classification = classify_bmi(bmi)
+    print(f"BMI Classification: {bmi_classification}")
+
+    print(f"Analyzing and plotting for {user_name}...")
+    analyze_and_plot(user_data, user_gender)
+
+if __name__ == "__main__":
+    main()
