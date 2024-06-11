@@ -1,0 +1,96 @@
+# -*- coding: utf-8 -*-
+"""
+BMI calculation and classification functions.
+Title: Application of Topological Data Analysis and High Order Network Structures in Nutritional Status of Children: Surpassing Body Mass Index With Topological Signatures
+Author: André Luiz de Góes Pacheco
+"""
+
+def calculate_bmi(weight, height):
+    """
+    Calculates the Body Mass Index (BMI).
+
+    Parameters:
+    weight (float): Weight of the person in kilograms.
+    height (float): Height of the person in meters.
+
+    Returns:
+    float: The BMI value.
+    """
+    bmi = weight / (height ** 2)
+    return bmi
+
+def classify_bmi(bmi):
+    """
+    Classifies the BMI into categories.
+
+    Parameters:
+    bmi (float): The BMI value.
+
+    Returns:
+    str: The classification category.
+    """
+    if bmi < 18.5:
+        return "Underweight"
+    elif 18.5 <= bmi < 24.9:
+        return "Normal weight"
+    elif 25 <= bmi < 29.9:
+        return "Overweight"
+    elif bmi >= 30:
+        return "Obese"
+
+def analyze_body_composition(gc, gender, bmi_classification):
+    """
+    Analyzes the body composition based on body fat percentage and gender.
+
+    Parameters:
+    gc (float): Body fat percentage.
+    gender (str): Gender of the person ('Male' or 'Female').
+    bmi_classification (str): The BMI classification.
+
+    Returns:
+    str: The classification considering body fat percentage.
+    """
+    if gender == "Female":
+        if 16 <= gc <= 30:
+            return bmi_classification
+        elif gc > 30:
+            return "False Lean"
+    elif gender == "Male":
+        if 6 <= gc <= 24:
+            return bmi_classification
+        elif gc > 25:
+            return "False Lean"
+    return bmi_classification
+
+def analyze_person(weight, height, muscle_mass, fat_mass, body_fat, waist_circumference, gender):
+    """
+    Analyzes the person based on various body metrics.
+
+    Parameters:
+    weight (float): Weight in kilograms.
+    height (float): Height in meters.
+    muscle_mass (float): Muscle mass in kilograms.
+    fat_mass (float): Fat mass in kilograms.
+    body_fat (float): Body fat percentage.
+    waist_circumference (float): Waist circumference in centimeters.
+    gender (str): Gender of the person ('Male' or 'Female').
+
+    Returns:
+    str: The final classification of the person.
+    """
+    bmi = calculate_bmi(weight, height)
+    bmi_classification = classify_bmi(bmi)
+
+    if bmi_classification in ["Underweight", "Normal weight"]:
+        return analyze_body_composition(body_fat, gender, bmi_classification)
+    else:
+        if gender == "Female" and 16 <= body_fat <= 30:
+            return "False Obese"
+        elif gender == "Female" and body_fat > 30:
+            return bmi_classification
+        elif gender == "Male" and 6 <= body_fat <= 24:
+            return "False Obese"
+        elif gender == "Male" and body_fat > 25:
+            return bmi_classification
+        else:
+            return bmi_classification
