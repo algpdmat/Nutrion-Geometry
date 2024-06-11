@@ -1,0 +1,39 @@
+# -*- coding: utf-8 -*-
+"""
+Comprehensive analysis and visualization of body metrics.
+"""
+
+def analyze_and_plot(person1, gender1):
+    """
+    Analyzes and plots body metrics for comparison.
+
+    Parameters:
+    person1 (list): Body metrics for the first person.
+    gender1 (str): Gender of the first person ('Male' or 'Female').
+
+    Returns:
+    None
+    """
+    # Fixed metrics for the second person
+    person2 = [109.5, 1.81, 97.70, 11.8, 10.8, 86]
+    gender2 = "Male"
+
+    result1 = analyze_person(*person1, gender1)
+    result2 = analyze_person(*person2, gender2)
+
+    print(f"Classification for Person 1: {result1}")
+    print(f"Classification for Person 2: {result2}")
+
+    custom_names = [
+        ['%GC', 'Fat Mass', 'Muscle Mass'],
+        ['Weight', 'Waist Circumference', 'Fat Mass'],
+        ['Weight', 'Waist Circumference', 'Muscle Mass'],
+        ['Weight', 'Height', 'Muscle Mass'],
+        ['Weight', '%GC', 'Fat Mass'],
+        ['Weight', 'Fat Mass', 'Muscle Mass'],
+        ['Weight', 'Waist Circumference', 'Height'],
+        ['Weight', '%GC', 'Height'],
+        ['Weight', 'Fat Mass', 'Height']
+    ]
+
+    plot_polar_triplets_comparison(person1, person2, custom_plot_names=custom_names)
